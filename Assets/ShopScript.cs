@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ShopScript : MonoBehaviour
 {
+
+    public static ShopScript instance;
   
     public bool isInteractingWithPlayer;
     public BoxCollider buttonRange;
@@ -18,13 +20,24 @@ public class ShopScript : MonoBehaviour
 
     public GameObject buyPanelUI;
 
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         shopDialogUI.SetActive(false);
         
     }
-       
-   
+
+    private void Update()
+    {
+        Debug.Log(isInteractingWithPlayer);
+    }
+
+
 
     private void OnTriggerEnter(Collider other)
     { 
@@ -32,6 +45,8 @@ public class ShopScript : MonoBehaviour
        {
             isInteractingWithPlayer = true;
             shopDialogUI.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
        }
         
     }
@@ -42,6 +57,8 @@ public class ShopScript : MonoBehaviour
         {
             isInteractingWithPlayer = false;
             shopDialogUI.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
         }
 
     }

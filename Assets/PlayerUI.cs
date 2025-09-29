@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerUI : MonoBehaviour
 {
 
+    
     public GameObject shop;
     public int money = 100;
 
