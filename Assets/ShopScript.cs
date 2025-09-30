@@ -5,61 +5,63 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class ShopScript : MonoBehaviour
+namespace StarterAssets
 {
 
-    public static ShopScript instance;
-  
-    public bool isInteractingWithPlayer;
-    public BoxCollider buttonRange;
 
-
-    public GameObject shopDialogUI;
-    public Button buyBTN;
-    public Button exitBTN;
-
-    public GameObject buyPanelUI;
-
-
-    private void Awake()
+    public class ShopScript : MonoBehaviour
     {
-        instance = this;
-    }
 
-    private void Start()
-    {
-        shopDialogUI.SetActive(false);
-        
-    }
-
-    private void Update()
-    {
-        Debug.Log(isInteractingWithPlayer);
-    }
+        public static ShopScript instance;
+        public PlayerUI playerUI;
+        public FirstPersonController fpsController;
 
 
+        public bool isInteractingWithPlayer;
+        public BoxCollider buttonRange;
 
-    private void OnTriggerEnter(Collider other)
-    { 
-       if (other.CompareTag("Player"))
-       {
-            isInteractingWithPlayer = true;
-            shopDialogUI.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-       }
-        
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        public GameObject shopDialogUI;
+        public Button buyBTN;
+        public Button exitBTN;
+
+        public GameObject buyPanelUI;
+
+
+        private void Awake()
         {
-            isInteractingWithPlayer = false;
-            shopDialogUI.SetActive(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.None;
+            instance = this;
         }
 
+        private void Start()
+        {
+            buyBTN.onClick.AddListener(shoesBuy);
+            shopDialogUI.SetActive(false);
+
+        }
+
+        private void shoesBuy()
+        {
+            playerUI.hasShoes = true;
+            Debug.Log("shoes is true");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                playerUI.inShop();
+            }
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                playerUI.exitShop();
+            }
+
+        }
     }
 }

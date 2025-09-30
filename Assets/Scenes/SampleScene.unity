@@ -1351,10 +1351,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3b997472eb8ab42b9d743ae03b2d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 785996183}
+  fpsController: {fileID: 785996187}
   isInteractingWithPlayer: 0
   buttonRange: {fileID: 400609558}
   shopDialogUI: {fileID: 2026665419}
-  buyBTN: {fileID: 0}
+  buyBTN: {fileID: 887644639}
   exitBTN: {fileID: 0}
   buyPanelUI: {fileID: 0}
 --- !u!1 &410087039
@@ -4275,7 +4277,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395323, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_StreamingVersion
-      value: 20241001
+      value: 20170927
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4300,8 +4302,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf61fbe6dd5dcb41ae688e6f1e7c18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fpsController: {fileID: 785996187}
   shop: {fileID: 400609557}
   money: 100
+  hasShoes: 0
+  isInteractingWithPlayer: 0
+  shopDialogUI: {fileID: 2026665419}
+--- !u!114 &785996187 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
+    type: 3}
+  m_PrefabInstance: {fileID: 1908076004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785996177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
