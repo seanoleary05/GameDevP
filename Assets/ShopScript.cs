@@ -11,6 +11,8 @@ namespace StarterAssets
 
     public class ShopScript : MonoBehaviour
     {
+        Button[] buttons;
+        int shoesCost;
 
         public static ShopScript instance;
         public PlayerUI playerUI;
@@ -35,6 +37,7 @@ namespace StarterAssets
 
         private void Start()
         {
+
             buyBTN.onClick.AddListener(shoesBuy);
             shopDialogUI.SetActive(false);
 
@@ -42,8 +45,13 @@ namespace StarterAssets
 
         private void shoesBuy()
         {
-            playerUI.hasShoes = true;
-            Debug.Log("shoes is true");
+            if ((playerUI.money > 50) && (playerUI.hasShoes == false))
+            {
+                playerUI.money = playerUI.money - 50;
+                playerUI.hasShoes = true;
+                Debug.Log("shoes is true");
+
+            }
         }
 
         private void OnTriggerEnter(Collider other)

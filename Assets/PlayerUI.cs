@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 namespace StarterAssets
 {
@@ -12,11 +14,20 @@ namespace StarterAssets
         public static PlayerUI instance;
         [SerializeField]
         public FirstPersonController _fpsController;
+
         public GameObject shop;
-        public int money = 100;
+        public float money = 100;
         public bool hasShoes = false;
         public bool isInteractingWithPlayer;
+
         public GameObject shopDialogUI;
+        public GameObject mainUI;
+        public GameObject gameoverUI;
+
+
+        public TMP_Text moneyText;
+        public float difficlutyScaler;
+
 
 
 
@@ -55,16 +66,32 @@ namespace StarterAssets
 
         }
 
+        public void gameOver()
+        {
+            if (money < 0.0f)
+            {
+                mainUI.SetActive(false);
+                shopDialogUI.SetActive(false);
+                gameoverUI.SetActive(true);
+
+            }
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             _fpsController = GetComponent<FirstPersonController>();
             shopDialogUI.SetActive(false);
+            mainUI.SetActive(true);
+            gameoverUI.SetActive(false);
         }
 
         // Update is called once per frame
         void Update()
         {
+            gameOver();
+            money -= Time.deltaTime * difficlutyScaler;
+            moneyText.SetText("Money: " + money);
             jumpMod();
             Debug.Log(_fpsController.JumpHeight);
         }
