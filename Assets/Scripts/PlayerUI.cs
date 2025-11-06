@@ -93,7 +93,7 @@ namespace StarterAssets
             money -= Time.deltaTime * difficlutyScaler;
             moneyText.SetText("Money: " + money);
             jumpMod();
-            Debug.Log(_fpsController.JumpHeight);
+            
         }
     }
 }
