@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 namespace StarterAssets
 {
@@ -73,6 +74,9 @@ namespace StarterAssets
                 mainUI.SetActive(false);
                 shopDialogUI.SetActive(false);
                 gameoverUI.SetActive(true);
+                Invoke(nameof(restartGame),5.0f);
+                
+                
 
             }
         }
@@ -94,6 +98,11 @@ namespace StarterAssets
             moneyText.SetText("Money: " + money);
             jumpMod();
             
+        }
+
+        public void restartGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

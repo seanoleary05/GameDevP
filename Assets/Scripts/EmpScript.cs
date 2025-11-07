@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EmpScript : MonoBehaviour
 {
+    public static EmpScript instance;
+    public EnemyHive eHive;
     public GameObject Alert;
     public bool isActive = false;
     public Transform Target;
@@ -18,5 +20,18 @@ public class EmpScript : MonoBehaviour
     void Update()
     {
         alertTransform.LookAt(Target.transform);   
+    }
+
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            eHive.newJob();
+            Debug.Log("triggered box");
+
+        }
     }
 }
