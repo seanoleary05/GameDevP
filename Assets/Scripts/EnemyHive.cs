@@ -7,7 +7,8 @@ public class EnemyHive : MonoBehaviour
 {
     public static EnemyHive instance;
     public PlayerUI playerUI;
-    [SerializeField] EmpScript[] emps;
+    [SerializeField] List<EmpScript> statics;
+    [SerializeField] List<EmpWaypointScript> waypoints;
     public GameObject player;
     int empsSpawned = 0;
     int currentJob = -1;
@@ -16,6 +17,11 @@ public class EnemyHive : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        statics.AddRange(waypoints);
+
+        Debug.Log("emps count + " + statics.Count);
+
 
         Invoke(nameof(assignJob), 2.0f);
     }
@@ -29,10 +35,10 @@ public class EnemyHive : MonoBehaviour
 
     public void assignJob()
     {
-        empsSpawned = emps.Length;
+        empsSpawned = statics.Count;
         currentJob = Random.Range(0, empsSpawned);
         Debug.Log(empsSpawned + " + " + currentJob);
-        emps[currentJob].Alert.SetActive(true);
+        statics[currentJob].Alert.SetActive(true);
 
     }
 
@@ -40,7 +46,7 @@ public class EnemyHive : MonoBehaviour
     public void newJob()
     {
         playerUI.money += 20;
-        emps[currentJob].Alert.SetActive(false);
+        statics[currentJob].Alert.SetActive(false);
         assignJob();
     }
 
