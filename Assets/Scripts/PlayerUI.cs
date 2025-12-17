@@ -17,7 +17,8 @@ namespace StarterAssets
         public FirstPersonController _fpsController;
 
         public GameObject shop;
-        public float money = 100;
+        public float money = 150;
+        public float startingMoney = 100;
         public bool hasShoes = false;
         public bool isInteractingWithPlayer;
 
@@ -94,8 +95,7 @@ namespace StarterAssets
         void Update()
         {
             gameOver();
-            money -= Time.deltaTime * difficlutyScaler;
-            moneyText.SetText("Money: " + money);
+            scaleMoneyText(moneyText);
             jumpMod();
             
         }
@@ -103,6 +103,34 @@ namespace StarterAssets
         public void restartGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void scaleMoneyText(TMP_Text moneyCount)
+        {
+            money -= Time.deltaTime * difficlutyScaler;
+            moneyCount.SetText("$" + money.ToString("F2"));
+            float moneyTrueFontSize = (money / startingMoney) * 100;
+            float moneyMinFontSize = 30;
+            float moneyMaxFontSize = 50;
+
+                if ( money > 0 && money < 30)
+                {
+                    moneyCount.fontSize = moneyMinFontSize;
+                }
+                else if (money > 100)
+                {
+                    moneyCount.fontSize = moneyMaxFontSize;
+                }
+                else if(money < 100 && money > 31)
+                {
+                    moneyCount.fontSize = moneyTrueFontSize;
+                }
+               
+
+
+                    
+            
+          
         }
     }
 }
