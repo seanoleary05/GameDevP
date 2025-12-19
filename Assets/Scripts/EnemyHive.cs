@@ -37,7 +37,6 @@ public class EnemyHive : MonoBehaviour
     {
         empsSpawned = statics.Count;
         currentJob = Random.Range(0, empsSpawned);
-        Debug.Log(empsSpawned + " + " + currentJob);
         statics[currentJob].Alert.SetActive(true);
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -25,12 +26,13 @@ namespace StarterAssets
         public GameObject shopDialogUI;
         public GameObject mainUI;
         public GameObject gameoverUI;
+        public Button restartBTN;
 
 
         public TMP_Text moneyText;
         public float difficlutyScaler;
 
-
+ 
 
 
         public void jumpMod()
@@ -75,9 +77,11 @@ namespace StarterAssets
                 mainUI.SetActive(false);
                 shopDialogUI.SetActive(false);
                 gameoverUI.SetActive(true);
-                Invoke(nameof(restartGame),5.0f);
-                
-                
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+
+
+
 
             }
         }
@@ -85,10 +89,14 @@ namespace StarterAssets
         // Start is called before the first frame update
         void Start()
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None;
             _fpsController = GetComponent<FirstPersonController>();
             shopDialogUI.SetActive(false);
             mainUI.SetActive(true);
             gameoverUI.SetActive(false);
+            restartBTN.onClick.AddListener(restartGame);
+
         }
 
         // Update is called once per frame
